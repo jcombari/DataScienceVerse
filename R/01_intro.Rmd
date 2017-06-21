@@ -1,0 +1,58 @@
+# Introducción {#intro} 
+
+## Orígenes
+R es un lenguaje de programación usado para realizar procedimientos estadísticos y gráficos de alto nivel, este lenguaje fue creado en 1993 por los profesores e investigadores Robert Gentleman y Ross Ihaka. Inicialmente el lenguaje se usó para apoyar los cursos que tenían a su cargo los profesores, pero luego de ver la utilidad de la herramienta desarrollada, decidieron colocar copias de R en StatLib. A partir de 1995 el código fuente de R está disponible bajo licencia GNU GPL para sistemas operativos Windows, Macintosh y distribuciones Unix/Linux. La comunidad de usuarios de R en el mundo es muy grande y los usuarios cuentan con diferentes espacios para interactuar, a continuación una lista no exhaustiva de los sitios más populares relacionados con R:
+
+- [Rbloggers](https://www.r-bloggers.com/).
+- [Comunidad hispana de R](http://r-es.org/).
+- [Nabble](http://r.789695.n4.nabble.com/).
+- [Foro en portugués](http://r-br.2285057.n4.nabble.com/).
+- [Stackoverflow](http://stackoverflow.com/questions/tagged/r).
+- [Cross Validated](http://stats.stackexchange.com/questions/tagged/r).
+- [R-Help Mailing List](https://stat.ethz.ch/mailman/listinfo/r-help).
+- [Revolutions](http://blog.revolutionanalytics.com/).
+- [R-statistics blog](https://www.r-statistics.com/).
+- [RDataMining](https://rdatamining.wordpress.com/).
+
+En la siguiente figura están Robert Gentleman (izquierda) y Ross Ihaka (derecha) creadores de R.
+
+<p align="center">
+  <img src="images/Robert_Roos.png" width="500">
+</p>
+
+## Instalación
+
+Para realizar la instalación de R usted debe visitar la página del CRAN (Comprehensive R Archive Network) disponible en este [enlace](https://cran.r-project.org/). Una vez ingrese a la página encontrará un cuadro similar al mostrado en la siguiente figura donde encontrará los enlaces de la instalación para los sistemas operativos Linux, Mac y Windows.
+
+<p align="center">
+  <img src="images/cran.png" width="500">
+</p>
+
+Supongamos que se desea instalar R en Windows, para esto se debe dar clic sobre el hiperenlace __Download R for Windows__. Una vez hecho esto se abrirá una página con el contenido mostrado en la siguiente figura. Luego se debe dar clic sobre el hiperenlace __install R for the first time__.
+
+<p align="center">
+  <img src="images/instalacion01.png" width="500">
+</p>
+  
+Luego de esto se abrirá otra página con un encabezado similar al mostrado en la siguiente figura. Al momento de capturar la figura la versión actual de R era 3.2.5 pero con certeza usted tendrá disponible la versión actualizada. Una vez allí uste debe dar clic sobre __Download R 3.2.5 for Windows__ como es señalado por la flecha verde. Luego de esto se descargará el instalador R en el computador el cual deberá ser instalado con las opciones que vienen por defecto.
+
+<p align="center">
+  <img src="images/instalacion02.png" width="500">
+</p>
+
+Se recomienda observar el siguiente video didáctico de instalación de R disponible en este [enlace](https://youtu.be/rzw1E6HxBFY) para facilitar la tarea de instalación.
+
+## Apariencia del programa
+
+Una vez que esté instalado R en su computador, usted podrá acceder a él por la lista de programas o por medio del acceso directo que quedó en el escritorio, en la siguiente figura se muestra la apariencia del acceso directo para ingresar a R.
+
+<p align="center">
+  <img src="images/rlogo.png" width="200">
+</p>
+
+Al abrir R aparecerá en la pantalla de su computador algo similar a lo que está en la siguiente figura. La ventana izquierda se llama consola y es donde se ingresan las instrucciones, una vez que se construye un gráfico se activa otra ventana llamada ventana gráfica. Cualquier usuario puede modificar la posición y tamaños de estas ventanas, puede cambiar el tipo y tamaño de las letras en la consola, para hacer esto se deben explorar las opciones de __editar__ en la barra de herramientas.
+
+<p align="center">
+  <img src="images/Rpantallazo.png" width="700">
+</p>
+
