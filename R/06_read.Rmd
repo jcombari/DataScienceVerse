@@ -1,0 +1,217 @@
+# Lectura de bases de datos {#read}
+
+En este capítulo se mostrará cómo leer una base de datos externa hacia R.
+
+## ¿Qué es una base de datos?
+Una base de datos es un arreglo ordenado de variables numéricas, lógicas y cualitativas.
+
+En la siguiente figura se ilustran los elementos de una base de datos.
+
+<p align="center">
+  <img src="images/tidy_data.png" width="700">
+</p>
+
+## ¿En qué formato almacenar una base de datos?
+Usualmente los archivos con la información para ser leídos por R se pueden almacenar en formato:
+
+- plano con extensión __.txt__ o, 
+- Excel con extensión __.csv__. 
+
+En las secciones siguientes se mostrará cómo almacenar datos en los dos formatos para ser leídos en R. En el Cuadro \@ref(tab:dt1) se presenta una base de datos pequeña, tres observaciones y tres variables, que nos servirá como ejemplo para mostrar cómo se debe almacenar la información.
+
+```{r dt1, echo=F}
+Edad <- c(35, 46, 23)
+Fuma <- c(TRUE, TRUE, FALSE)
+Pais <- c('Colombia', 'Francia', 'Malta')
+dt <- data.frame(Edad, Fuma, Pais)
+knitr::kable(dt, booktabs = TRUE,
+caption = 'Ejemplo de una base de datos simple.'
+)
+```
+
+### Almacenamiento de información en Excel
+Para almacenar la información del Cuadro \@ref(tab:dt1) en Excel, abrimos un archivo nuevo archivo de Excel y copiamos la información tal como se muestra en la figura de abajo. Se debe iniciar en la parte superior izquierda, no se deben dejar filas vacías, no se debe colorear, no se deben colocar bordes ni nada, se ingresa la información sin embellecer el contenido. Por último se guarda el archivo en la carpeta deseada y al momento de nombrar el archivo se debe modificar la opción tipo de archivo a __csv (delimitado por comas)__.
+
+<p align="center">
+  <img src="images/excel1.png" width="500">
+</p>
+
+```{block2, type='rmdwarning'}
+Recuerde que el archivo de Excel se debe guardar con extensión .csv.
+```
+
+### Almacenamiento de información en bloc de notas
+Para almacenar la información del Cuadro \@ref(tab:dt1) en un bloc de notas abrimos un archivo nuevo de bloc de notas y copiamos la información tal como se muestra en la figura de abajo. Se copian los nombres de las variables o los datos separados por un espacio obtenido con la tecla tabuladora, cada línea se finaliza con un _enter_. Para guardar el archivo se recomienda que el cursor quede al inicio de una línea vacía. En la figura de abajo se señala la posición del cursor con la flecha roja, a pesar de que no éxiste línea número 5, el curso debe quedar al inicio de esa línea número 5.
+
+<p align="center">
+  <img src="images/bloc1.png" width="500">
+</p>
+
+Es posible mejorar la apariencia de la información almacenada en el bloc de notas si, en lugar de usar espacios con la barra espaciadora, se colocan los espacios con la barra tabuladora, así la información se ve más organizada y se puede chequear fácilmente la información ingresada. En la siguiente figura se muestra la información para el ejemplo, claramente se nota la organización de la información.
+
+<p align="center">
+  <img src="images/bloc2.png" width="500">
+</p>
+
+```{block2, type='rmdtip'}
+Una buena práctica es usar la barra tabuladora para separar, eso permite que la información se vea ordenada.
+```
+
+## Función `read.table`
+La función `read.table` se puede usar para leer bases de datos hacia R. La estructura de la función con los parámetros más comunes de uso es la siguiente.
+
+```{r, eval=F}
+read.table(file, header, sep, dec)
+```
+
+Los argumentos de la función `read.table` son:
+
+- `file`: nombre o ruta donde están alojados los datos. Puede ser un url o una dirección del computador. Es también posible usar `file.choose()` para que se abra un ventana y adjuntar el archivo deseado manualmente.
+- `header`: valor lógico, se usa `TRUE` si la primera línea de la base de datos tiene los nombres de las variables, caso contrario se usa `FALSE`.
+- `sep`: tipo de separación interna para los datos dentro del archivo. Los valores usuales para este parámetros son:
+    - `sep=','` si el archivo tiene extensión .csv. 
+    - `sep=''` si el archivo es bloc de notas con espacios por la barra __espaciadora__. 
+    - `sep='\t'` si el archivo es bloc de notas con espacios por la barra __tabuladora__. 
+- `dec`: símbolo con el cual están indicados los decimales.
+
+### Ejemplo {-}
+Crear la base de datos del Cuadro \@ref(tab:dt1) en Excel y bloc de notas para practicar la lectura de base de datos desde R.
+
+__Solución__
+
+Lo primero que se debe hacer para realizar lo solicitado es construir tres archivos (uno de Excel y dos bloc de notas) igual a los mostrados en las figuras anteriores. Vamos a suponer que los nombres para cada uno de ellos son `base1.csv`, `base2.txt` y `base3.txt` respectivamente.
+
+#### Para Excel {-}
+
+Para leer el archivo de Excel llamado `base1.csv` podemos usar el siguiente código.
+
+```{r, eval=F}
+datos <- read.table(file='C:/Users/mi_usuario/Desktop/base1.csv',
+                    header=TRUE, sep=',')
+datos
+```
+
+La dirección `file='C:/Users/mi_usuario/Desktop/base1.csv'` le indica a R en qué lugar del computador debe buscar el archivo, note que se debe usar el símbolo `/` para que sea un dirección válida. Substituya la dirección del código anterior con la dirección donde se encuentra su archivo para que pueda leer la base de datos.
+
+Si no se conoce la ubicación del archivo a leer o si la dirección es muy extensa, se puede usar `file.choose()` para que se abra una ventana y así adjuntar manualmente el archivo. A continuación se muestra el código para hacerlo de esta manera.
+
+```{r, eval=F}
+datos <- read.table(file.choose(), header=TRUE, sep=',')
+datos
+```
+
+#### Para bloc de notas con barra espaciadora {-}
+
+Para leer el archivo de Excel llamado `base2.txt` podemos usar el siguiente código.
+
+```{r, eval=F}
+datos <- read.table(file='C:/Users/mi_usuario/Desktop/base2.txt',
+                    header=TRUE, sep='')
+datos
+```
+
+#### Para bloc de notas con barra tabuladora {-}
+
+Para leer el archivo de Excel llamado `base3.txt` podemos usar el siguiente código.
+
+```{r, eval=F}
+datos <- read.table(file='C:/Users/mi_usuario/Desktop/base3.txt',
+                    header=TRUE, sep='\t')
+datos
+```
+
+```{block2, type='rmdnote'}
+El usuario puede usar indiferentemente `file='C:/Users/bla/bla'` o `file.choose()` para ingresar el archivo, con la práctica se aprende a decidir cuando conviene una u otra forma. 
+```
+
+```{block2, type='rmdwarning'}
+Un error frecuente es escribir la dirección o ubicación del archivo usando `\`, lo correcto es usar `/`.
+```
+
+### Ejemplo {-}
+Leer la base de datos sobre apartamentos usados en la ciudad de Medellín que está disponible en la página web cuya url es: https://raw.githubusercontent.com/fhernanb/datos/master/aptos2015
+
+__Solución__
+
+Para leer la base de datos desde una url usamos el siguiente código.
+
+```{r}
+enlace <- 'https://raw.githubusercontent.com/fhernanb/datos/master/aptos2015'
+datos <- read.table(file=enlace, header=TRUE)
+```
+
+La base de datos ingresada queda en el marco de datos llamado `datos` y ya está disponible para usarla.
+
+## Lectura de bases de datos en Excel
+Algunas veces los datos están disponibles en un archivo estándar de Excel, y dentro de cada archivo hojas con la información a utilizar. En estos casos se recomienda usar el paquete **readxl** [@R-readxl] y en particular la función `readxl`. A continuación un ejemplo de cómo proceder en estos casos.
+
+### Ejemplo {-}
+En este [enlace](https://github.com/fhernanb/datos/blob/master/BD_Excel.xlsx) está disponible un archivo de Excel llamado BD_Excel.xlxs, una vez se ha abierto la página donde está alojado el archivo, se debe descargar y guardar en alguna carpeta. El archivo contiene dos bases de datos muy pequeñas, en la primera hoja llamada __Hijos__ está la información de un grupo de niños y en la segunda hoja llamada __Padres__ está la información de los padres. ¿Cómo se pueden leer las dos bases de datos?
+
+__Solución__
+
+Lo primero que se debe hacer es instalar el paquete **readxl**, la instalación de cualquier paquete en un computador se hace una sola vez y éste quedará instalado para ser usado las veces que se requiera. La función para instalar un paquete cualquiera es `install.packages`, a continuación se muestra el código necesario para instalar el paquete **readxl**.
+
+```{r, eval=FALSE}
+install.packages("readxl")
+```
+
+Una vez instalado el paquete es necesario cargarlo, la función para cargar el paquete en la sesión actual de R es `library`. La instrucción para cargar el paquete es la siguiente:
+
+```{r}
+library(readxl)
+```
+
+```{block2, type='rmdwarning'}
+La instalación de un paquete con `install.packages` se hace sólo una vez y no más. Cargar el paquete con `library` en la sesión actual se debe hacer siempre que se vaya a usar el paquete.
+```
+
+Luego de haber cargado el paquete **readxl** se puede usar la función `read_xl` para leer la información contenida en las hojas. A continuación el código para crear la base de datos `hijos` contenida en el archivo BD_Excel.xlsx.
+
+```{r, eval=FALSE}
+hijos <- read_excel(file.choose(), sheet='Hijos')
+as.data.frame(hijos)  # Para ver el contenido
+```
+
+
+```{r, echo=FALSE}
+hijos <- read_excel('BD_Excel.xlsx', sheet='Hijos')
+as.data.frame(hijos) # Para ver el contenido
+```
+
+A continuación el código para crear la base de datos `padres` contenida en el archivo BD_Excel.xlsx.
+
+```{r, eval=FALSE}
+padres <- read_excel('BD_Excel.xlsx', sheet='Padres')
+as.data.frame(padres)  # Para ver el contenido
+```
+
+```{r, echo=FALSE}
+padres <- read_excel('BD_Excel.xlsx', sheet='Padres')
+as.data.frame(padres)  # Para ver el contenido
+```
+
+La función `read_excel` tiene otros parámetros adicionales útiles para leer bases de datos, se recomienda consultar la ayuda de la función escribiendo en la consola `help(read_excel)`.
+
+
+## EJERCICIOS {-}
+Realice los siguiente ejercicios propuestos.
+
+1. En el Cuadro \@ref(tab:toy) se presenta una base de datos sencilla. Almacene la información del cuadro en dos archivos diferentes, en Excel y en bloc de notas. Lea los dos archivos con la función `read.table` y compare los resultados obtenidos con la del Cuadro \@ref(tab:toy) fuente.
+
+```{r toy, echo=F}
+Fuma <- c('Si', 'Si', 'No', 'No', 'Si', 'No', 'Si', NA, 'Si')
+Pasatiempo <- c('Lectura', NA, 'Correr', 'Correr', 'TV', 'TV', 'Correr', 'Correr', 'Lectura')
+Num_hermanos <- c(0, 2, 4, NA, 3, 1, 1, 0, 2)
+Mesada <- c(4500, 2600, 1000, 3990, 2570, 2371, 1389, 4589, NA)
+
+datos <- data.frame(Fuma, Pasatiempo, Num_hermanos, Mesada)
+knitr::kable(
+datos, booktabs = TRUE,
+caption = 'Base de datos para practicar lectura.'
+)
+```
+
+2. En la url https://raw.githubusercontent.com/fhernanb/datos/master/medidas_cuerpo están disponibles los datos sobre medidas corporales para un grupo de estudiante de la universidad, use la función `read.table` para leer la base de datos.
+
+
